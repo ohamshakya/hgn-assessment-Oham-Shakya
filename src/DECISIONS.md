@@ -54,5 +54,19 @@ One device can be assigned to only one active order.
 
 Therefore, when an alert comes from a device, the system can identify the correct order through the AssignDevice record.
 
+### Deduplication
+The system uses a 5-minute timestamp limit to identify retransmitted SOS messages.
+The 5-minute limit helps remove duplicate alerts caused by network delays or message retries. It is long enough to catch common retransmissions but short enough to allow new SOS events to be detected.
+
+### Escalation
+I used scheduling for every minutes the api hit createdAt before and pending status
+and changes status to Escalated.
+
+### concurrency handling
+Before assigning a device or coordinator, the system checks the current status of the order and device. If the status is already ASSIGNED, the request is rejected. If the status is available, it is updated to ASSIGNED and the assignment is saved.
+
+### Unsure about
+Two coordinates claiming alert same time when api hit
+
 
 

@@ -1,5 +1,7 @@
 package com.himalaya.task.service.impl;
 
+import com.himalaya.task.common.enums.AlertStatus;
+import com.himalaya.task.common.exception.ResourceNotFoundException;
 import com.himalaya.task.dto.AlertDto;
 import com.himalaya.task.entity.Alert;
 import com.himalaya.task.mapper.AlertMapper;
@@ -31,7 +33,7 @@ public class AlertServiceImpl implements AlertService {
         LocalDateTime fiveMinutesAgo = LocalDateTime.now().minusMinutes(5);
 
         Optional<Alert> existing =
-                alertRepo.checkDeviceIdAndTImestamp(alertDto.deviceId(), fiveMinutesAgo);
+                alertRepo.checkDeviceIdAndTimestamp(alertDto.deviceId(), fiveMinutesAgo);
 
         if (existing.isPresent()) {
             throw new IllegalArgumentException("Duplicate alert");
@@ -45,5 +47,14 @@ public class AlertServiceImpl implements AlertService {
     public List<AlertDto> getAll() {
         log.info("inside get all alert : service");
         return alertRepo.findAll().stream().map(AlertMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public String alertAckKnowledge(Integer id) {
+        log.info("inside alert ack knowledge ; service");
+        Alert alert = alertRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("Alert not found"));
+        alert.setAlertStatus(AlertStatus.ACK_KNOWLEDGE);
+        alertRepo.save(alert);
+        return "Ack knowledge";
     }
 }

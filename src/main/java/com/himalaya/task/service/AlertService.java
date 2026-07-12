@@ -9,4 +9,7 @@ public interface AlertService {
     AlertDto create(AlertDto alertDto);
 
     List<AlertDto> getAll();
+
+
+    String alertAckKnowledge(Integer id);
 }

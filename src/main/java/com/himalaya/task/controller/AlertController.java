@@ -30,9 +30,16 @@ public class AlertController {
     }
 
     @GetMapping
-    public ResponseEntity<?> getAll(){
+    public ResponseWrapper<List<AlertDto>> getAll(){
         log.info("inside get all alert : controller");
         List<AlertDto> all = alertService.getAll();
-        return new ResponseEntity<>(all,HttpStatusCode.valueOf(HttpStatus.OK.value()));
+        return new ResponseWrapper<>(all,"retrieved",HttpStatus.OK.value(),true);
+    }
+
+    @PatchMapping("/{id}/acknowledge")
+    public ResponseWrapper<String> acknowledgeAlert(@PathVariable Integer id){
+        log.info("inside ackKnowledge alert : controller");
+        String response = alertService.alertAckKnowledge(id);
+        return new ResponseWrapper<>(response,"acknowledged alert",HttpStatus.OK.value(),true);
     }
 }
