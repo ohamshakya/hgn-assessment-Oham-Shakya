@@ -1,26 +1,37 @@
 services:
   postgres:
     image: postgres:16
+    container_name: postgres
 
     environment:
       POSTGRES_DB: himalayan_task_db
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
+      POSTGRES_PASSWORD: postgres
 
     ports:
-      - "5432:5432"
+      - "5433:5433"
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
 
   app:
-    build: src
+    build: .
+
+    env_file:
+      - .env
 
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
 
     ports:
       - "8081:8081"
 
-    environment:
-    - spring.datasource.url=jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${POSTGRES_DB:hospital_db}
-    - spring.datasource.username=${POSTGRES_USER:postgres}
-    - spring.datasource.password=${POSTGRES_PASSWORD:postgres}
-    - server.port=${SPRING_PORT}
+volumes:
+  postgres_data:

@@ -131,15 +131,6 @@ Spring Boot API:
 http://localhost:8081
 ```
 
-PostgreSQL:
-
-| Property | Value |
-|----------|-------|
-| Host | localhost |
-| Port | 5432 |
-| Database | Defined by `POSTGRES_DB` |
-| Username | Defined by `POSTGRES_USER` |
-| Password | Defined by `POSTGRES_PASSWORD` |
 
 ---
 
@@ -150,14 +141,6 @@ PostgreSQL:
 ```bash
 docker ps
 ```
-
-### View logs
-
-```bash
-docker compose logs
-```
-
-### Follow logs
 
 ```bash
 docker compose logs -f
