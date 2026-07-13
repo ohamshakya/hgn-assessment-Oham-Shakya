@@ -6,10 +6,9 @@ import com.himalaya.task.dto.GroupDto;
 import com.himalaya.task.service.GroupService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/group")
@@ -24,7 +23,16 @@ public class GroupController {
     @PostMapping
     public ResponseWrapper<GroupDto> create(@RequestBody GroupDto groupDto){
         log.info("inside create group : controller");
-        GroupDto groupDto1 = groupService.create(groupDto);
-        return new ResponseWrapper<>(groupDto1,"created", HttpStatus.OK.value(),true);
+        GroupDto created = groupService.create(groupDto);
+        return new ResponseWrapper<>(created,"created", HttpStatus.OK.value(),true);
     }
+
+    @GetMapping
+    public ResponseWrapper<List<GroupDto>> getAll(){
+        log.info("inside get all group : controller");
+        List<GroupDto> getAllResponse = groupService.getAll();
+        return new ResponseWrapper<>(getAllResponse,"retrieved successfully",HttpStatus.OK.value(), true);
+    }
+
+
 }

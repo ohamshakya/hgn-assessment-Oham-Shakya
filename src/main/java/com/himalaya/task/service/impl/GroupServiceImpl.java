@@ -9,6 +9,9 @@ import com.himalaya.task.service.GroupService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @Slf4j
 public class GroupServiceImpl implements GroupService {
@@ -29,5 +32,11 @@ public class GroupServiceImpl implements GroupService {
         Groups entity = GroupMapper.toEntity(groupDto);
         groupRepo.save(entity);
         return GroupMapper.toDto(entity);
+    }
+
+    @Override
+    public List<GroupDto> getAll() {
+        log.info("inside get all group : service");
+        return groupRepo.findAll().stream().map(GroupMapper::toDto).collect(Collectors.toList());
     }
 }
