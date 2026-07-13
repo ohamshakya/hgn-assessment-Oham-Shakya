@@ -13,15 +13,13 @@ public class GroupMapper {
     public static Groups toEntity(GroupDto groupDto){
         Groups groups = new Groups();
         groups.setGroupName(groupDto.groupName());
-        List<Member> member = groupDto.member().stream().map(memberDto -> {Member member1 = new Member();
-            member1.setFirstName(memberDto.firstName());
-            member1.setLastName(memberDto.lastName());
-            member1.setFullName(memberDto.fullName());
-            member1.setEmail(memberDto.email());
-            member1.setPhoneNumber(memberDto.phoneNumber());
-        member1.setGroups(groups);
+        List<Member> member = groupDto.member().stream().map(memberDto -> {Member members = new Member();
+            members.setFullName(memberDto.fullName());
+            members.setEmail(memberDto.email());
+            members.setPhoneNumber(memberDto.phoneNumber());
+        members.setGroups(groups);
 
-        return member1;
+        return members;
         }).toList();
         groups.setMember(member);
         return groups;
@@ -45,8 +43,6 @@ public class GroupMapper {
     public static MemberDto toDto(Member member){
         return MemberDto.builder()
                 .id(member.getId())
-                .firstName(member.getFirstName())
-                .lastName(member.getLastName())
                 .fullName(member.getFullName())
                 .email(member.getEmail())
                 .phoneNumber(member.getPhoneNumber())

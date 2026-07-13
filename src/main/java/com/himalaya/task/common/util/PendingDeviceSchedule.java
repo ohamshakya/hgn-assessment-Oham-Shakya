@@ -19,13 +19,13 @@ public class PendingDeviceSchedule {
     }
 
     @Scheduled(fixedRate = 10000)
-    public void sayHello(){
+    public void escalate(){
         LocalDateTime timeLimit = LocalDateTime.now().minusMinutes(5);
         List<Alert> alertByAlertStatusAndCreatedAtBefore = alertRepo.findAlertByAlertStatusAndCreatedAtBefore(AlertStatus.PENDING, timeLimit);
-        for(Alert i : alertByAlertStatusAndCreatedAtBefore){
-            System.out.println(i.getAlertStatus() + " " + i.getLatitude() + " " + i.getLongitude());
-            i.setAlertStatus(AlertStatus.ESCALATED);
-            alertRepo.save(i);
+        for(Alert alert : alertByAlertStatusAndCreatedAtBefore){
+            System.out.println(alert.getAlertStatus() + " " + alert.getLatitude() + " " + alert.getLongitude());
+            alert.setAlertStatus(AlertStatus.ESCALATED);
+            alertRepo.save(alert);
         }
     }
 }

@@ -30,6 +30,7 @@ public class OrdersMapper {
             member.add(dto);
         }
         GroupDto groups = GroupDto.builder()
+                .id(orders.getGroups().getId())
                 .groupName(orders.getGroups().getGroupName())
                 .member(member)
                 .build();
