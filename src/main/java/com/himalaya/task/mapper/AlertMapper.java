@@ -3,11 +3,12 @@ package com.himalaya.task.mapper;
 import com.himalaya.task.common.enums.AlertStatus;
 import com.himalaya.task.dto.AlertDto;
 import com.himalaya.task.entity.Alert;
+import com.himalaya.task.entity.Device;
 
 public class AlertMapper {
-    public static Alert toEntity(AlertDto alertDto){
+    public static Alert toEntity(AlertDto alertDto,Device device){
         return Alert.builder()
-                .deviceId(alertDto.deviceId())
+                .device(device)
                 .longitude(alertDto.longitude())
                 .latitude(alertDto.latitude())
                 .timestamp(alertDto.timestamp())
@@ -18,7 +19,7 @@ public class AlertMapper {
     public static AlertDto toDto(Alert alert){
         return AlertDto.builder()
                 .uuidCode(alert.getUuidCode())
-                .deviceId(alert.getDeviceId())
+                .deviceId(alert.getDevice().getDeviceId())
                 .longitude(alert.getLongitude())
                 .latitude(alert.getLatitude())
                 .timestamp(alert.getTimestamp())

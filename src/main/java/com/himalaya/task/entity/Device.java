@@ -19,7 +19,7 @@ public class Device {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String deviceCode;
+    private String deviceId;
 
     @OneToMany(mappedBy = "device")
     private List<AssignDevice> assignDevice = new ArrayList<>();

@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 public record AlertDto(
         String uuidCode,
 
-        @NotBlank(message = "Device id should not be blank")
+        @NotBlank(message = "Device code should not be blank")
         String deviceId,
 
         String latitude,

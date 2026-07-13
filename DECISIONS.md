@@ -9,6 +9,9 @@ I implemented the Alert service, which is responsible for receiving SOS alerts f
 3. Device are registered.
 4. A device is assigned through order and group
 5. An alert is sent from the device and is saved to the database.
+6. If the alert is pending 5 minutes earlier the schedule hit every minute and change status to escalated.
+7. After the alert is ack Knowledge the status changed to ack_knowledge
+8. The device is return to its respective place after finishing trek.
 
 
 The current implementation ends after storing the alert. In a complete system, another service would consume the stored alerts and handle coordinator assignment, notifications, and escalation.

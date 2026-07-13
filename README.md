@@ -64,9 +64,9 @@ Example:
 DB_HOST=postgres
 DB_PORT=5432
 
-POSTGRES_DB=hospital_db
-POSTGRES_USER=postgres
-POSTGRES_PASSWORD=postgres
+POSTGRES_DB=example_db
+POSTGRES_USER=postgres_username
+POSTGRES_PASSWORD=postgres_password
 
 SPRING_PORT=8081
 ```
@@ -113,59 +113,18 @@ docker compose up -d --build
 docker ps
 ```
 
-Example output:
-
-```text
-CONTAINER ID   IMAGE          PORTS
-xxxxxxx        postgres:16    0.0.0.0:5432->5432/tcp
-xxxxxxx        your-app       0.0.0.0:8081->8081/tcp
-```
-
----
-
 ## Access the Application
 
 Spring Boot API:
 
 ```
 http://localhost:8081
+
+Spring Boot API with swagger:
+
+http://localhost:8081/swagger-ui/index.html#/
 ```
 
-
----
-
-## Useful Docker Commands
-
-### View running containers
-
-```bash
-docker ps
-```
-
-```bash
-docker compose logs -f
-```
-
-### Stop containers
-
-```bash
-docker compose down
-```
-
-### Stop containers and remove volumes
-
-> **Warning:** This removes the PostgreSQL database data stored in Docker volumes.
-
-```bash
-docker compose down -v
-```
-
-### Rebuild after code changes
-
-```bash
-./gradlew clean build
-docker compose up --build
-```
 
 ---
 
@@ -178,12 +137,12 @@ docker compose up --build
 - Docker
 - Docker Compose
 
----
 
-## Notes
-
-- Docker Compose automatically reads environment variables from the `.env` file.
-- The Spring Boot application connects to PostgreSQL using the Docker service name (`postgres`).
-- Ensure Docker is running before starting the application.
-- If you change the application port, update both `server.port` in `application.properties` and the port mapping in `compose.yaml`.
-````
+##Working Flow of API
+1. Register Device
+2. Register group and members
+3. Create Order
+4. Assign Device with order and device
+5. create alert which comes from device
+6. acknowledge 
+7. return device

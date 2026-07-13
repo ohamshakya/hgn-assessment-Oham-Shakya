@@ -45,7 +45,6 @@ public class AssignDeviceServiceImpl implements AssignDeviceService {
             throw new IllegalArgumentException("Sorry The order is already assigned");
         }
         order.setOrderStatus(OrderStatus.ASSIGNED);
-
         Device device = deviceRepo.findById(assignDeviceDto.deviceId()).orElseThrow(() -> new ResourceNotFoundException("Device not found"));
         if(device.getAvailability().equals(Availability.ASSIGNED)){
             throw new IllegalArgumentException("Device is already assigned");

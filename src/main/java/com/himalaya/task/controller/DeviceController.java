@@ -5,10 +5,9 @@ import com.himalaya.task.dto.DeviceDto;
 import com.himalaya.task.service.DeviceService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/device")
@@ -26,5 +25,12 @@ public class DeviceController {
         log.info("inside create device : controller");
         DeviceDto created = deviceService.create(deviceDto);
         return new ResponseWrapper<>(created, "created successfully", HttpStatus.OK.value(), true);
+    }
+
+    @GetMapping
+    public ResponseWrapper<List<DeviceDto>> getAll(){
+        log.info("inside get all device : controller");
+        List<DeviceDto> getAllResponse = deviceService.getAll();
+        return new ResponseWrapper<>(getAllResponse,"retrieved successfully",HttpStatus.OK.value(), true);
     }
 }

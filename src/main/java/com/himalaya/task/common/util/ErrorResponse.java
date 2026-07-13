@@ -17,14 +17,4 @@ public class ErrorResponse {
         ResponseWrapper<T> responseWrapper = new ResponseWrapper<>(data, message, status.value(), false);
         return ResponseEntity.status(status).body(responseWrapper);
     }
-
-    public static void writeErrorResponse(HttpServletResponse response, String message, HttpStatus status) throws IOException {
-        ResponseWrapper<String> stringWrapper = new ResponseWrapper<>(null, message, status.value(), false);
-        response.setStatus(status.value());
-        response.setContentType("application/json;charset=UTF-8");
-
-        ObjectMapper mapper = new ObjectMapper();
-        String jsonResponse = mapper.writeValueAsString(stringWrapper);
-        response.getWriter().write(jsonResponse);
-    }
 }

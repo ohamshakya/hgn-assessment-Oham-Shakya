@@ -10,7 +10,7 @@ public record DeviceDto(
         Integer id,
 
         @NotBlank(message = "device code is required")
-        String deviceCode,
+        String deviceId,
 
         Availability availability
 ) {

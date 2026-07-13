@@ -11,9 +11,8 @@ import java.util.Optional;
 
 public interface AlertRepo extends JpaRepository<Alert,Integer> {
 
-    Alert findAlertByUuidCode(String uuidCode);
 
-    @Query("SELECT a FROM Alert a WHERE a.deviceId = :deviceId AND a.createdAt >= :timestamp")
+    @Query("SELECT a FROM Alert a WHERE a.device.deviceId = :deviceId AND a.createdAt >= :timestamp")
     Optional<Alert> checkDeviceIdAndTimestamp(String deviceId, LocalDateTime timestamp);
 
     List<Alert> findAlertByAlertStatusAndCreatedAtBefore(

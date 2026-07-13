@@ -7,7 +7,7 @@ import com.himalaya.task.entity.Device;
 public class DeviceMapper {
     public static Device toEntity(DeviceDto deviceDto) {
         return Device.builder()
-                .deviceCode(deviceDto.deviceCode())
+                .deviceId(deviceDto.deviceId())
                 .availability(Availability.AVAILABLE)
                 .build();
     }
@@ -15,7 +15,7 @@ public class DeviceMapper {
     public static DeviceDto toDto(Device device) {
         return DeviceDto.builder()
                 .id(device.getId())
-                .deviceCode(device.getDeviceCode())
+                .deviceId(device.getDeviceId())
                 .availability(device.getAvailability())
                 .build();
     }

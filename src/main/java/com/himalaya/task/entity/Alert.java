@@ -16,8 +16,9 @@ import java.time.LocalDateTime;
 @Builder
 public class Alert {
 
-
-    private String deviceId;
+    @ManyToOne()
+    @JoinColumn(name = "device_id")
+    private Device device;
 
     private String longitude;
 
