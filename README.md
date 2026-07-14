@@ -71,10 +71,6 @@ POSTGRES_PASSWORD=postgres_password
 SPRING_PORT=8081
 ```
 
-> **Note:** Do not commit your `.env` file to Git. Only commit `.env.example`.
-
----
-
 ## Build the Application
 
 ### Linux / macOS
